@@ -1,0 +1,1 @@
+There's no way to auto-install currently, so if you'd like to try it out, just run Main.py and you should be set.
