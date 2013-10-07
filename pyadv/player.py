@@ -1,12 +1,12 @@
 from random import random
 import pickle
 
-class Player:
+class Player():
     stats = {}
+    base_multipliers = ()
     def __init__(self, name, stats = None, exp = 0):
         self.name = name
         self.exp = exp
-        self.level = calc_level(self.exp)
         self.turns = 0
         if stats is None:
             self.stats['attack'] = 5
@@ -26,11 +26,16 @@ class Player:
     def full_restore(self):
         self.cur_hp = self.stats['health']
         
-def calc_level(exp):
-    for i in range(100):
-        if exp_needed(i) > exp:
-            return i - 1
-    return
+    @property
+    def level(self):
+        for i in range(100):
+            if exp_needed(i) > self.exp:
+                return i - 1
+        return
+        
+    @property
+    def percenthealth(self):
+        return self.cur_hp / self.stats['health']
     
 def exp_needed(level):
     exp = 0

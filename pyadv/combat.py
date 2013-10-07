@@ -1,6 +1,6 @@
 from colorama import Fore, Back
 from collections import deque
-from DrawUtils import clear_screen
+from drawutils import clear_screen
 import time
 import colorama
 import os
@@ -24,10 +24,11 @@ def battle(player, enemy):
                Fore.RED, hit_queue[1], Fore.RESET,
                Fore.RED, hit_queue[0], Fore.RESET))
         
-        print('{}{}\n{}{}{}{}{}\n{}{}{}hp ({}{}{}%)  ---   <{}{}{}-{}{}{}-{}{}{}-{}{}{}-{}{}{}-{}{}{}> last 3 hits\n'.format(
+        print('{}{}\n{}{}{}{}{}{}{}\n{}{}{}hp ({}{}{}%)  ---   <{}{}{}-{}{}{}-{}{}{}-{}{}{}-{}{}{}-{}{}{}> last 3 hits\n'.format(
                Fore.YELLOW, enemy.name,
-               Back.GREEN, ' ' * int(enemy_avg_hp * 64), 
-               Back.WHITE, ' ' * (64 - int(enemy_avg_hp * 64)), Back.RESET,
+               Back.GREEN, ' ' * int(enemy_avg_hp * 64),
+               Back.RED, ' ' * round(p_atk),
+               Back.WHITE, ' ' * (64 - round((enemy_avg_hp * 64) + p_atk)), Back.RESET,
                Fore.GREEN, enemy.cur_hp, Fore.RESET,
                Fore.GREEN, int(enemy_avg_hp * 100), Fore.RESET,
                Fore.RED, enemy_hit_queue[5], Fore.RESET,

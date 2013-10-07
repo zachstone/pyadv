@@ -1,7 +1,7 @@
-from Player import Player, save, load, calc_level
-from Combat import battle
+from player import Player, save, load
+from combat import battle
 from random import random
-from DrawUtils import clear_screen, show_options
+from drawutils import clear_screen, show_options
 import os
 import sys
 import glob
@@ -40,7 +40,7 @@ def load_file():
     if len(save_names) >= 1:
         try:
             player_choice = show_options([save_names[i] + ' (lvl ' + str(save_games[i].level) + ')' for i in range(len(save_names))],
-                                  'What is your character\'s name?\n')
+                                         'What is your character\'s name?\n')
             return save_games[player_choice]
         except FileNotFoundError:
             pass
@@ -80,11 +80,10 @@ def main():
             player.turns += 1
             enemy = Player('Enemy')
             if battle(player, enemy) is True:
-                exp_gain = int(random() * 4) + 1
-                print('You won!', player.name, 'gains', exp_gain, 'exp.')
-                player.exp += exp_gain
                 cur_lvl = player.level
-                player.level = calc_level(player.exp)
+                exp_gain = int(random() * 8) + 1
+                player.exp += exp_gain
+                print('You won!', player.name, 'gains', exp_gain, 'exp.')
                 if player.level > cur_lvl:
                     print(player.name, 'is now level', player.level)
             else:
